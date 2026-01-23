@@ -1,0 +1,22 @@
+# Binaries
+*.exe
+*.dll
+*.so
+*.dylib
+bin/
+
+# Data
+data/
+*.db
+*.sqlite
+
+# Uploads
+uploads/
+!uploads/.keep
+
+# Logs
+*.log
+
+# Editor
+.vscode/
+.idea/

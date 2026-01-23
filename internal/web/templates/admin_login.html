@@ -1,0 +1,25 @@
+{{define "content"}}
+<section class="section admin login">
+  <div class="section-head">
+    <h1>{{.PageTitle}}</h1>
+    <p>请输入后台账号与密码。</p>
+  </div>
+  {{if .Error}}
+  <div class="form-error">{{.Error}}</div>
+  {{end}}
+  <form class="admin-form" method="post" action="/admin/login">
+    <label>
+      账号
+      <input type="text" name="username" placeholder="admin" required />
+    </label>
+    <label>
+      密码
+      <input type="password" name="password" required />
+    </label>
+    <div class="admin-actions">
+      <button class="primary-btn" type="submit">登录</button>
+      <a class="secondary-btn" href="{{.SiteURL}}/">返回首页</a>
+    </div>
+  </form>
+</section>
+{{end}}

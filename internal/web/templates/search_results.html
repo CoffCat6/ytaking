@@ -1,0 +1,29 @@
+<div class="search-meta">共找到 {{len .Results}} 篇文章</div>
+<div class="post-grid">
+  {{range .Results}}
+  <article class="post-card">
+    <div class="post-thumb">
+      {{if .CoverImage}}
+      <img src="{{.CoverImage}}" alt="{{.Title}}">
+      {{else}}
+      <span>图片占位</span>
+      {{end}}
+    </div>
+    <div class="post-meta">
+      <span>{{formatDate .CreatedAt}}</span>
+      <span>·</span>
+      <span>{{.ReadTime}}</span>
+      {{if .Category}}<span class="badge">{{.Category}}</span>{{end}}
+      {{if .Featured}}<span class="badge">精选</span>{{end}}
+    </div>
+    {{if .Tags}}
+    <div class="tag-row">
+      {{range .Tags}}<span class="tag">{{.}}</span>{{end}}
+    </div>
+    {{end}}
+    <h3>{{.Title}}</h3>
+    <p>{{.Summary}}</p>
+    <a class="text-link" href="{{$.SiteURL}}/posts/{{.Slug}}">继续阅读 -></a>
+  </article>
+  {{end}}
+</div>

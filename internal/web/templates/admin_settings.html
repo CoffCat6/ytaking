@@ -1,0 +1,47 @@
+{{define "content"}}
+<section class="section admin">
+  <div class="section-head">
+    <h1>{{.PageTitle}}</h1>
+    <p>更新站点标题、简介与联系方式。</p>
+  </div>
+  {{if .Error}}
+  <div class="form-error">{{.Error}}</div>
+  {{end}}
+  <form class="admin-form" method="post" action="/admin/settings">
+    <input type="hidden" name="csrf_token" value="{{.CSRFToken}}" />
+    <label>
+      站点标题
+      <input type="text" name="title" value="{{.Profile.Title}}" required />
+    </label>
+    <label>
+      标语
+      <input type="text" name="tagline" value="{{.Profile.Tagline}}" />
+    </label>
+    <label>
+      简介
+      <textarea name="intro" rows="3">{{.Profile.Intro}}</textarea>
+    </label>
+    <label>
+      地点
+      <input type="text" name="location" value="{{.Profile.Location}}" />
+    </label>
+    <label>
+      邮箱
+      <input type="email" name="email" value="{{.Profile.Email}}" />
+    </label>
+    <label>
+      通讯
+      <textarea name="newsletter" rows="3">{{.Profile.Newsletter}}</textarea>
+    </label>
+    <label>
+      当前在做
+      <textarea name="current_focus" rows="4" placeholder="每行一条">{{.FocusText}}</textarea>
+    </label>
+    <div class="admin-actions">
+      <button class="primary-btn" type="submit">保存设置</button>
+      <a class="secondary-btn" href="/admin/logout">退出</a>
+      <a class="secondary-btn" href="/admin/posts">返回管理</a>
+    </div>
+  </form>
+</section>
+{{end}}

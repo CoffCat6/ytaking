@@ -1,0 +1,51 @@
+{{define "content"}}
+<section class="section admin">
+  <div class="section-head">
+    <h1>文章管理</h1>
+    <p>在这里新增、编辑和删除文章。</p>
+    <div class="admin-actions">
+      <a class="primary-btn" href="/admin/posts/new">新建文章</a>
+      <a class="secondary-btn" href="/admin/settings">站点设置</a>
+      <a class="secondary-btn" href="/admin/logout">退出</a>
+      <a class="secondary-btn" href="{{.SiteURL}}">查看站点</a>
+    </div>
+  </div>
+  <div class="admin-table">
+    <div class="admin-row admin-head">
+      <div>标题</div>
+      <div>Slug</div>
+      <div>日期</div>
+      <div>操作</div>
+    </div>
+    {{range .Posts}}
+    <div class="admin-row">
+      <div>{{.Title}} {{if .IsDraft}}<span class="badge">草稿</span>{{end}}</div>
+      <div class="muted">{{.Slug}}</div>
+      <div>{{formatDate .CreatedAt}}</div>
+      <div class="admin-actions">
+        <a class="text-link" href="/admin/posts/edit?slug={{.Slug}}">编辑</a>
+        <form method="post" action="/admin/posts/delete" class="inline-form">
+          <input type="hidden" name="csrf_token" value="{{$.CSRFToken}}" />
+          <input type="hidden" name="slug" value="{{.Slug}}" />
+          <button class="ghost-btn" type="submit">删除</button>
+        </form>
+      </div>
+    </div>
+    {{end}}
+  </div>
+
+  <div class="pagination">
+    {{if .HasPrev}}
+    <a class="pagination-link" href="/admin/posts?page={{.PrevPage}}">← 上一页</a>
+    {{else}}
+    <span class="pagination-disabled">← 上一页</span>
+    {{end}}
+    <span class="pagination-info">第 {{.CurrentPage}} / {{.TotalPages}} 页</span>
+    {{if .HasNext}}
+    <a class="pagination-link" href="/admin/posts?page={{.NextPage}}">下一页 →</a>
+    {{else}}
+    <span class="pagination-disabled">下一页 →</span>
+    {{end}}
+  </div>
+</section>
+{{end}}
