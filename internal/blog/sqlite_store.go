@@ -4,6 +4,8 @@ import (
 	"database/sql"
 	"encoding/json"
 	"fmt"
+	"os"
+	"path/filepath"
 	"sort"
 	"time"
 
@@ -15,6 +17,12 @@ type SQLiteStore struct {
 }
 
 func NewSQLiteStore(dsn string) (*SQLiteStore, error) {
+	// 确保数据库文件所在的目录存在
+	dir := filepath.Dir(dsn)
+	if err := os.MkdirAll(dir, 0755); err != nil {
+		return nil, fmt.Errorf("failed to create database directory: %w", err)
+	}
+
 	db, err := sql.Open("sqlite", dsn)
 	if err != nil {
 		return nil, err

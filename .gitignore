@@ -9,6 +9,8 @@ bin/
 data/
 *.db
 *.sqlite
+*.db-shm
+*.db-wal
 
 # Uploads
 uploads/
