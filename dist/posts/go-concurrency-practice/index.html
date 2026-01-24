@@ -1,0 +1,117 @@
+
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Go 的并发模型：从实践出发 - Ytakling(言说)</title>
+  <meta name="description" content="用真实服务的吞吐案例解释 goroutine、channel 与背压设计。">
+  <meta name="keywords" content="Go, 并发">
+  <meta property="og:title" content="Go 的并发模型：从实践出发 - Ytakling(言说)" />
+  <meta property="og:description" content="用真实服务的吞吐案例解释 goroutine、channel 与背压设计。" />
+  <meta property="og:url" content="http://localhost:8080/posts/go-concurrency-practice" />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" />
+  <meta property="og:type" content="article" />
+  <script>
+    (function() {
+      var stored = localStorage.getItem('theme');
+      if (stored) {
+        document.documentElement.setAttribute('data-theme', stored);
+      } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    })();
+  </script>
+
+  <link rel="stylesheet" href="/static/css/app.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Literata:opsz,wght@7..72,300;7..72,500;7..72,700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+  
+</head>
+
+<body>
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="brand brand-link" href="http://localhost:8080/" title="返回主页">
+        <span class="brand-mark">*</span>
+        <div>
+          <div class="brand-title">Go 的并发模型：从实践出发 - Ytakling(言说)</div>
+          <div class="brand-sub">个人博客 - 长期记录</div>
+        </div>
+      </a>
+      <nav class="site-nav">
+        <a href="http://localhost:8080/posts">文章</a>
+        <a href="http://localhost:8080/archive">归档</a>
+        <a href="#about">关于</a>
+        <a href="#subscribe">订阅</a>
+        <button class="theme-toggle" id="theme-btn" aria-label="切换主题">
+            <span id="theme-icon">◐</span>
+        </button>
+      </nav>
+    </header>
+
+    <main class="main-content">
+      
+<section class="section post-detail">
+  <div class="post-header">
+    <a class="text-link" href="http://localhost:8080/posts">&lt;- 返回文章列表</a>
+    <h1>Go 的并发模型：从实践出发</h1>
+    <div class="post-meta">
+      <span>2025-12-18</span>
+      <span>·</span>
+      <span>阅读时间: 1 分钟</span>
+      <span class="badge">工程</span>
+    </div>
+    
+    <div class="tag-row">
+      <span class="tag">Go</span><span class="tag">并发</span>
+    </div>
+    
+    <p class="lead">用真实服务的吞吐案例解释 goroutine、channel 与背压设计。</p>
+  </div>
+  
+  <div class="post-cover">
+    <img src="https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="Go 的并发模型：从实践出发">
+  </div>
+  
+  <div class="post-content"><p>并发不是为了炫技，而是为了让系统在压力下保持稳定。</p>
+<h2>实践要点</h2>
+<ul>
+<li>为关键路径建立背压</li>
+<li>将 goroutine 生命周期收敛</li>
+<li>用 channel 表达业务流程</li>
+</ul>
+<p><img src="https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="Go"></p>
+</div>
+
+  
+</section>
+
+    </main>
+
+    <footer class="site-footer">
+      <div>(c) 2026 Go 的并发模型：从实践出发 - Ytakling(言说) - Build with Go</div>
+      <div class="footer-links">
+        <a href="http://localhost:8080/feed">RSS</a>
+        <a href="mailto:zhreddie@outlook.com">邮箱</a>
+        <a href="https://github.com/">GitHub</a>
+      </div>
+    </footer>
+  </div>
+  <script>
+    (function() {
+      var btn = document.getElementById('theme-btn');
+      var root = document.documentElement;
+      btn.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        var target = current === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', target);
+        localStorage.setItem('theme', target);
+      });
+    })();
+  </script>
+</body>
+</html>
