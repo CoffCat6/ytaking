@@ -41,20 +41,18 @@ func main() {
 
 	server := web.NewServer(cfg, store, siteStore)
 
+	// 合并公开路由和管理路由到同一个服务器
+	// Fly.io 只支持单端口，管理后台通过 /admin/* 路径访问
+	mux := http.NewServeMux()
+
+	// 注册公开路由
 	publicMux := server.PublicRoutes()
+	mux.Handle("/", publicMux)
+
+	// 注册管理路由 (已有 /admin/ 前缀)
 	adminMux := server.AdminRoutes()
+	mux.Handle("/admin/", adminMux)
 
-	errCh := make(chan error, 2)
-
-	go func() {
-		log.Printf("public listening on %s", cfg.PublicAddr)
-		errCh <- http.ListenAndServe(cfg.PublicAddr, publicMux)
-	}()
-
-	go func() {
-		log.Printf("admin listening on %s", cfg.AdminAddr)
-		errCh <- http.ListenAndServe(cfg.AdminAddr, adminMux)
-	}()
-
-	log.Fatal(<-errCh)
+	log.Printf("Server listening on %s (public + admin)", cfg.PublicAddr)
+	log.Fatal(http.ListenAndServe(cfg.PublicAddr, mux))
 }
