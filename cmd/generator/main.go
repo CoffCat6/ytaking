@@ -58,7 +58,8 @@ func main() {
 	for _, p := range posts {
 		routes = append(routes, "/posts/"+p.Slug)
 	}
-
+	// Add posts list page
+	routes = append(routes, "/posts")
 	// Add archive page
 	routes = append(routes, "/archive")
 
