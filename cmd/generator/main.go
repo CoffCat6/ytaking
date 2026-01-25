@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"io"
 	"log"
@@ -8,6 +9,7 @@ import (
 	"net/http/httptest"
 	"os"
 	"path/filepath"
+	"strings"
 
 	"myblog/internal/blog"
 	"myblog/internal/config"
@@ -15,13 +17,14 @@ import (
 )
 
 func main() {
+	baseURL := flag.String("base-url", "", "Override the site base URL")
+	flag.Parse()
+
 	// 1. Load config and store
 	cfg := config.Load()
-
-	// 强制设置 SiteBaseURL 为环境变量或默认值，但在本地生成时可能需要根据部署目标调整
-	// 这里假设用户会在运行生成器前设置好环境变量，或者我们在这里可以覆盖
-	// 如果发布到 GitHub Pages，通常子路径是 /repo-name/
-	// 我们暂时保持 cfg 读取的逻辑，用户需自行配置 SITE_BASE_URL
+	if *baseURL != "" {
+		cfg.SiteBaseURL = strings.TrimRight(*baseURL, "/")
+	}
 
 	dbPath := filepath.Join(cfg.DataDir, "blog.db")
 	store, err := blog.NewSQLiteStore(dbPath)

@@ -1,20 +1,26 @@
 {{define "base"}}
 <!doctype html>
 <html lang="zh-CN">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <title>{{.Title}}</title>
-  {{if .Description}}<meta name="description" content="{{.Description}}">{{end}}
-  {{if .Keywords}}<meta name="keywords" content="{{.Keywords}}">{{end}}
+  {{if .Description}}
+  <meta name="description" content="{{.Description}}">{{end}}
+  {{if .Keywords}}
+  <meta name="keywords" content="{{.Keywords}}">{{end}}
   <meta property="og:title" content="{{.Title}}" />
-  {{if .Description}}<meta property="og:description" content="{{.Description}}" />{{end}}
-  {{if .SiteURL}}<meta property="og:url" content="{{.SiteURL}}{{if .CurrentPath}}{{.CurrentPath}}{{end}}" />{{end}}
-  {{if .CoverImage}}<meta property="og:image" content="{{.CoverImage}}" />{{end}}
+  {{if .Description}}
+  <meta property="og:description" content="{{.Description}}" />{{end}}
+  {{if .SiteURL}}
+  <meta property="og:url" content="{{.SiteURL}}{{if .CurrentPath}}{{.CurrentPath}}{{end}}" />{{end}}
+  {{if .CoverImage}}
+  <meta property="og:image" content="{{.CoverImage}}" />{{end}}
   <meta property="og:type" content="{{if .IsPost}}article{{else}}website{{end}}" />
   <script>
-    (function() {
+    (function () {
       var stored = localStorage.getItem('theme');
       if (stored) {
         document.documentElement.setAttribute('data-theme', stored);
@@ -24,10 +30,12 @@
     })();
   </script>
 
-  <link rel="stylesheet" href="/static/css/app.css">
+  <link rel="stylesheet" href="{{.SiteURL}}/static/css/app.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Literata:opsz,wght@7..72,300;7..72,500;7..72,700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Literata:opsz,wght@7..72,300;7..72,500;7..72,700&display=swap"
+    rel="stylesheet">
   <script src="https://unpkg.com/htmx.org@1.9.10"></script>
   {{block "head" .}}{{end}}
 </head>
@@ -48,14 +56,14 @@
         <a href="#about">关于</a>
         <a href="#subscribe">订阅</a>
         <button class="theme-toggle" id="theme-btn" aria-label="切换主题">
-            <span id="theme-icon">◐</span>
+          <span id="theme-icon">◐</span>
         </button>
       </nav>
     </header>
 
     <main class="main-content">
       {{block "content" .}}
-        <p>默认内容：未定义 content 模板</p>
+      <p>默认内容：未定义 content 模板</p>
       {{end}}
     </main>
 
@@ -69,10 +77,10 @@
     </footer>
   </div>
   <script>
-    (function() {
+    (function () {
       var btn = document.getElementById('theme-btn');
       var root = document.documentElement;
-      btn.addEventListener('click', function() {
+      btn.addEventListener('click', function () {
         var current = root.getAttribute('data-theme');
         var target = current === 'dark' ? 'light' : 'dark';
         root.setAttribute('data-theme', target);
@@ -81,5 +89,6 @@
     })();
   </script>
 </body>
+
 </html>
 {{end}}
