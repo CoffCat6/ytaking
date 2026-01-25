@@ -6,11 +6,11 @@
 bin/
 
 # Data
-data/
-*.db
-*.sqlite
-*.db-shm
-*.db-wal
+# data/
+# *.db
+# *.sqlite
+# *.db-shm
+# *.db-wal
 
 # Uploads
 uploads/
