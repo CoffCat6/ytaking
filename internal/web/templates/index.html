@@ -8,10 +8,6 @@
       <span class="meta-pill">{{.Location}}</span>
       <a class="meta-link" href="mailto:{{.Email}}">{{.Email}}</a>
     </div>
-    <form class="search-form hero-search" method="get" action="{{.SiteURL}}/search">
-      <input type="text" name="query" placeholder="搜索文章、标签或分类" />
-      <button class="primary-btn" type="submit">搜索</button>
-    </form>
     <div class="hero-actions">
       <a class="primary-btn" href="#posts">阅读最新</a>
       <a class="secondary-btn" href="#subscribe">订阅邮件</a>
@@ -93,7 +89,8 @@
   </div>
   <div class="post-grid fixed-grid">
     {{range .Posts}}
-    <article class="post-card" data-category="{{.Category}}" data-tags="{{range $i, $t := .Tags}}{{if $i}},{{end}}{{lower $t}}{{end}}">
+    <article class="post-card" data-category="{{.Category}}"
+      data-tags="{{range $i, $t := .Tags}}{{if $i}},{{end}}{{lower $t}}{{end}}">
       <div class="post-thumb">
         {{if .CoverImage}}
         <img src="{{.CoverImage}}" alt="{{.Title}}">
