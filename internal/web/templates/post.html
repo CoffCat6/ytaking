@@ -2,19 +2,19 @@
 <section class="section post-detail">
   <div class="post-header">
     <a class="text-link" href="{{.SiteURL}}/posts"><- 返回文章列表</a>
-    <h1>{{.Post.Title}}</h1>
-    <div class="post-meta">
-      <span>{{formatDate .Post.CreatedAt}}</span>
-      <span>·</span>
-      <span>阅读时间: {{.Post.ReadTime}}</span>
-      {{if .Post.Category}}<span class="badge">{{.Post.Category}}</span>{{end}}
-    </div>
-    {{if .Post.Tags}}
-    <div class="tag-row">
-      {{range .Post.Tags}}<span class="tag">{{.}}</span>{{end}}
-    </div>
-    {{end}}
-    <p class="lead">{{.Post.Summary}}</p>
+        <h1>{{.Post.Title}}</h1>
+        <div class="post-meta">
+          <span>{{formatDate .Post.CreatedAt}}</span>
+          <span>·</span>
+          <span>阅读时间: {{.Post.ReadTime}}</span>
+          {{if .Post.Category}}<span class="badge" data-category="{{.Post.Category}}">{{.Post.Category}}</span>{{end}}
+        </div>
+        {{if .Post.Tags}}
+        <div class="tag-row">
+          {{range .Post.Tags}}<span class="tag">{{.}}</span>{{end}}
+        </div>
+        {{end}}
+        <p class="lead">{{.Post.Summary}}</p>
   </div>
   {{if .Post.CoverImage}}
   <div class="post-cover">

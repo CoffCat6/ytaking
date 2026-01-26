@@ -87,8 +87,8 @@
       </div>
       <div class="post-meta">
         <span>{{formatDate .CreatedAt}}</span>
-        {{if .Category}}<span class="badge">{{.Category}}</span>{{end}}
-        {{if .Featured}}<span class="badge">精选</span>{{end}}
+        {{if .Category}}<span class="badge" data-category="{{.Category}}">{{.Category}}</span>{{end}}
+        {{if .Featured}}<span class="badge cat-featured">精选</span>{{end}}
       </div>
       {{if .Tags}}
       <div class="tag-row">
