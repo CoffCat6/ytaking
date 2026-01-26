@@ -47,19 +47,6 @@
     <a class="text-link" href="{{$.AdminURL}}/admin/posts/new">去创建 -></a>
     {{end}}
   </div>
-  <div class="pagination">
-    {{if .HasPrev}}
-    <a class="pagination-link" href="{{$.SiteURL}}/?page={{.PrevPage}}#posts">← 上一页</a>
-    {{else}}
-    <span class="pagination-disabled">← 上一页</span>
-    {{end}}
-    <span class="pagination-info">第 {{.CurrentPage}} / {{.TotalPages}} 页</span>
-    {{if .HasNext}}
-    <a class="pagination-link" href="{{$.SiteURL}}/?page={{.NextPage}}#posts">下一页 →</a>
-    {{else}}
-    <span class="pagination-disabled">下一页 →</span>
-    {{end}}
-  </div>
 </section>
 
 <section id="posts" class="section">
