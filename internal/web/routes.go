@@ -34,5 +34,8 @@ func (s *Server) AdminRoutes() http.Handler {
 	mux.HandleFunc("/admin/posts/delete", s.AdminPostDelete)
 	mux.HandleFunc("/admin/settings", s.AdminSettings)
 	mux.HandleFunc("/admin/upload", s.AdminUpload)
+	mux.HandleFunc("/admin/subscribers", s.AdminSubscribers)
+	mux.HandleFunc("/admin/subscribers/add", s.AdminSubscribe)
+	mux.HandleFunc("/admin/subscribers/delete", s.AdminUnsubscribe)
 	return adminAuth(mux)
 }
