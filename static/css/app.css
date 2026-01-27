@@ -93,11 +93,12 @@ a:hover {
 }
 
 .brand-icon {
-  width: 36px;
-  height: 36px;
+  width: 24px;
+  height: 24px;
   border-radius: 12px;
   object-fit: cover;
   box-shadow: var(--shadow);
+  flex-shrink: 0;
 }
 
 .brand-link:hover .brand-title {
