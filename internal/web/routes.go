@@ -15,7 +15,6 @@ func (s *Server) PublicRoutes() http.Handler {
 	mux.HandleFunc("/posts/", s.PostDetail)
 	mux.HandleFunc("/archive", s.ArchivePage)
 	mux.HandleFunc("/search", s.SearchPage)
-	mux.HandleFunc("/feed", s.RSS)
 	mux.HandleFunc("/sitemap.xml", s.Sitemap)
 
 	return mux

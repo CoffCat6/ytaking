@@ -20,7 +20,7 @@ import (
 
 func (s *Server) Index(w http.ResponseWriter, r *http.Request) {
 	page := 1
-	pageSize := 10
+	pageSize := 6
 	if p, err := strconv.Atoi(r.URL.Query().Get("page")); err == nil && p > 0 {
 		page = p
 	}

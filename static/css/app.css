@@ -377,15 +377,21 @@ a:hover {
 }
 
 .tag {
-  padding: 4px 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  padding: 0 10px;
   border-radius: 999px;
   background: var(--tag-bg);
   color: var(--tag-text);
-  font-size: 12px;
+  font-size: clamp(10px, 1.2vw, 12px);
   font-family: "Space Grotesk", "Arial", sans-serif;
   position: relative;
   z-index: 2;
   transition: opacity 0.2s;
+  line-height: 1;
+  white-space: nowrap;
 }
 
 .tag:hover {
@@ -393,14 +399,20 @@ a:hover {
 }
 
 .badge {
-  padding: 4px 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  padding: 0 10px;
   border-radius: 999px;
   background: var(--brand);
   color: #fff;
-  font-size: 12px;
+  font-size: clamp(10px, 1.2vw, 12px);
   font-family: "Space Grotesk", "Arial", sans-serif;
   position: relative;
   z-index: 2;
+  line-height: 1;
+  white-space: nowrap;
 }
 
 /* Category color variants */
