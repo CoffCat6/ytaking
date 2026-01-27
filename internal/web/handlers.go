@@ -363,42 +363,6 @@ func (s *Server) AdminLogout(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "/admin/login", http.StatusSeeOther)
 }
 
-func (s *Server) AdminSubscribers(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodGet {
-		http.Error(w, "method not allowed", http.StatusMethodNotAllowed)
-		return
-	}
-	subs := s.Store.ListSubscribers()
-	data := s.baseData(r)
-	data["PageTitle"] = "订阅管理"
-	data["Subscribers"] = subs
-	s.render(w, "admin_subscribers.html", data)
-}
-
-func (s *Server) AdminSubscribe(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodPost {
-		http.Error(w, "method not allowed", http.StatusMethodNotAllowed)
-		return
-	}
-	email := strings.TrimSpace(r.FormValue("email"))
-	if email != "" {
-		_ = s.Store.AddSubscriber(email)
-	}
-	http.Redirect(w, r, "/admin/subscribers", http.StatusSeeOther)
-}
-
-func (s *Server) AdminUnsubscribe(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodPost {
-		http.Error(w, "method not allowed", http.StatusMethodNotAllowed)
-		return
-	}
-	email := strings.TrimSpace(r.FormValue("email"))
-	if email != "" {
-		_ = s.Store.RemoveSubscriber(email)
-	}
-	http.Redirect(w, r, "/admin/subscribers", http.StatusSeeOther)
-}
-
 func parsePostForm(r *http.Request) blog.Post {
 	_ = r.ParseForm()
 	return blog.Post{

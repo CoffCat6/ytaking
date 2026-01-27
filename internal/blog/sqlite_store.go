@@ -68,11 +68,6 @@ func (s *SQLiteStore) init() error {
 		updated_at DATETIME
 	);
 	CREATE INDEX IF NOT EXISTS idx_posts_created_at ON posts(created_at DESC);
-	CREATE TABLE IF NOT EXISTS subscribers (
-		email TEXT PRIMARY KEY,
-		active BOOLEAN DEFAULT 1,
-		created_at DATETIME
-	);
 	`
 	_, err := s.db.Exec(query)
 	return err
@@ -220,42 +215,6 @@ func (s *SQLiteStore) Update(slug string, post Post) error {
 func (s *SQLiteStore) Delete(slug string) error {
 	_, err := s.db.Exec("DELETE FROM posts WHERE slug = ?", slug)
 	return err
-}
-
-// Subscriber methods
-
-func (s *SQLiteStore) AddSubscriber(email string) error {
-	_, err := s.db.Exec(`
-		INSERT INTO subscribers (email, active, created_at) 
-		VALUES (?, ?, ?)
-		ON CONFLICT(email) DO UPDATE SET active = 1
-	`, email, true, time.Now())
-	return err
-}
-
-func (s *SQLiteStore) RemoveSubscriber(email string) error {
-	_, err := s.db.Exec("UPDATE subscribers SET active = 0 WHERE email = ?", email)
-	return err
-}
-
-func (s *SQLiteStore) ListSubscribers() []Subscriber {
-	rows, err := s.db.Query("SELECT email, active, created_at FROM subscribers WHERE active = 1 ORDER BY created_at DESC")
-	if err != nil {
-		return []Subscriber{}
-	}
-	defer rows.Close()
-
-	var subs []Subscriber
-	for rows.Next() {
-		var s Subscriber
-		var active bool
-		if err := rows.Scan(&s.Email, &active, &s.CreatedAt); err != nil {
-			continue
-		}
-		s.Active = active
-		subs = append(subs, s)
-	}
-	return subs
 }
 
 // Helpers

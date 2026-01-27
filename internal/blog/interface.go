@@ -10,8 +10,4 @@ type Store interface {
 	Create(post Post) error
 	Update(slug string, post Post) error
 	Delete(slug string) error
-	// Subscriber methods
-	AddSubscriber(email string) error
-	RemoveSubscriber(email string) error
-	ListSubscribers() []Subscriber
 }
