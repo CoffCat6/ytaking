@@ -20,8 +20,13 @@ import (
 
 func (s *Server) Index(w http.ResponseWriter, r *http.Request) {
 	page := 1
-	pageSize := 6
-	if p, err := strconv.Atoi(r.URL.Query().Get("page")); err == nil && p > 0 {
+	pageSize := IndexPageSize
+	if strings.HasPrefix(r.URL.Path, "/page/") {
+		raw := strings.TrimPrefix(r.URL.Path, "/page/")
+		if p, err := strconv.Atoi(strings.Trim(raw, "/")); err == nil && p > 0 {
+			page = p
+		}
+	} else if p, err := strconv.Atoi(r.URL.Query().Get("page")); err == nil && p > 0 {
 		page = p
 	}
 
@@ -72,6 +77,8 @@ func (s *Server) Index(w http.ResponseWriter, r *http.Request) {
 	data["HasNext"] = page < totalPages
 	data["PrevPage"] = page - 1
 	data["NextPage"] = page + 1
+	data["PrevURL"] = s.pageURL(page - 1)
+	data["NextURL"] = s.pageURL(page + 1)
 
 	s.render(w, "index.html", data)
 }
@@ -513,6 +520,13 @@ func (s *Server) baseData(r *http.Request) map[string]any {
 		"AdminURL":     s.Config.AdminBaseURL,
 		"CSRFToken":    getCsrfToken(r),
 	}
+}
+
+func (s *Server) pageURL(page int) string {
+	if page <= 1 {
+		return s.Config.SiteBaseURL + "/#posts"
+	}
+	return s.Config.SiteBaseURL + "/page/" + strconv.Itoa(page) + "/#posts"
 }
 
 func splitLines(input string) []string {

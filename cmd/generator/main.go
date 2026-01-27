@@ -62,6 +62,15 @@ func main() {
 	routes = append(routes, "/posts")
 	// Add archive page
 	routes = append(routes, "/archive")
+	// Add paginated index pages (static)
+	totalPosts := len(posts)
+	totalPages := (totalPosts + web.IndexPageSize - 1) / web.IndexPageSize
+	if totalPages < 1 {
+		totalPages = 1
+	}
+	for i := 2; i <= totalPages; i++ {
+		routes = append(routes, fmt.Sprintf("/page/%d", i))
+	}
 
 	// 5. Generate pages
 	mux := srv.PublicRoutes()

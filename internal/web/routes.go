@@ -11,6 +11,7 @@ func (s *Server) PublicRoutes() http.Handler {
 
 	// 页面
 	mux.HandleFunc("/", s.Index)
+	mux.HandleFunc("/page/", s.Index)
 	mux.HandleFunc("/posts", s.PostsList)
 	mux.HandleFunc("/posts/", s.PostDetail)
 	mux.HandleFunc("/archive", s.ArchivePage)

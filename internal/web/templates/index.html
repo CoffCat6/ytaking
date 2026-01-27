@@ -123,13 +123,13 @@
   </div>
   <div class="pagination">
     {{if .HasPrev}}
-    <a class="pagination-link" href="{{$.SiteURL}}/?page={{.PrevPage}}#posts">← 上一页</a>
+    <a class="pagination-link" href="{{.PrevURL}}">← 上一页</a>
     {{else}}
     <span class="pagination-disabled">← 上一页</span>
     {{end}}
     <span class="pagination-info">第 {{.CurrentPage}} / {{.TotalPages}} 页</span>
     {{if .HasNext}}
-    <a class="pagination-link" href="{{$.SiteURL}}/?page={{.NextPage}}#posts">下一页 →</a>
+    <a class="pagination-link" href="{{.NextURL}}">下一页 →</a>
     {{else}}
     <span class="pagination-disabled">下一页 →</span>
     {{end}}
