@@ -36,6 +36,10 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Literata:opsz,wght@7..72,300;7..72,500;7..72,700&display=swap"
     rel="stylesheet">
+  <link rel="icon" href="{{.SiteURL}}/static/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="{{.SiteURL}}/static/favicon.png">
+  <link rel="apple-touch-icon" href="{{.SiteURL}}/static/apple-touch-icon.png">
+
   <script src="https://unpkg.com/htmx.org@1.9.10"></script>
   {{block "head" .}}{{end}}
 </head>
@@ -44,7 +48,8 @@
   <div class="page-shell">
     <header class="site-header">
       <a class="brand brand-link" href="{{.SiteURL}}/" title="返回主页">
-        <span class="brand-mark">*</span>
+        <img class="brand-icon" src="{{.SiteURL}}/static/favicon.png" alt="{{.Title}}" />
+         
         <div>
           <div class="brand-title">{{.Title}}</div>
           <div class="brand-sub">个人博客 - 长期记录</div>

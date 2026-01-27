@@ -92,6 +92,14 @@ a:hover {
   font-family: "Space Grotesk", "Arial", sans-serif;
 }
 
+.brand-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: var(--shadow);
+}
+
 .brand-link:hover .brand-title {
   color: var(--brand);
 }
