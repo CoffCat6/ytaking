@@ -1,0 +1,531 @@
+
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Ytaking(言说)</title>
+  
+  <meta name="description" content="我在做能长期生长的产品，喜欢清晰的结构、可维护的代码与有温度的文字。">
+  
+  <meta property="og:title" content="Ytaking(言说)" />
+  
+  <meta property="og:description" content="我在做能长期生长的产品，喜欢清晰的结构、可维护的代码与有温度的文字。" />
+  
+  <meta property="og:url" content="https://coffcat6.github.io/ytaking/" />
+  
+  <meta property="og:type" content="website" />
+  <script>
+    (function () {
+      var stored = localStorage.getItem('theme');
+      if (stored) {
+        document.documentElement.setAttribute('data-theme', stored);
+      } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    })();
+  </script>
+
+  <link rel="stylesheet" href="https://coffcat6.github.io/ytaking/static/css/app.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Literata:opsz,wght@7..72,300;7..72,500;7..72,700&display=swap"
+    rel="stylesheet">
+  <link rel="icon" href="https://coffcat6.github.io/ytaking/static/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="https://coffcat6.github.io/ytaking/static/favicon.png">
+  <link rel="apple-touch-icon" href="https://coffcat6.github.io/ytaking/static/apple-touch-icon.png">
+
+  <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+  
+</head>
+
+<body>
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="brand brand-link" href="https://coffcat6.github.io/ytaking/" title="返回主页">
+        <img class="brand-icon" src="https://coffcat6.github.io/ytaking/static/favicon.png" alt="Ytaking(言说)" />
+         
+        <div>
+          <div class="brand-title">Ytaking(言说)</div>
+          <div class="brand-sub">个人博客 - 长期记录</div>
+        </div>
+      </a>
+      <nav class="site-nav">
+        <a href="https://coffcat6.github.io/ytaking/posts">文章</a>
+        <a href="https://coffcat6.github.io/ytaking/archive">归档</a>
+        <a href="#about">关于</a>
+        <button class="theme-toggle" id="theme-btn" aria-label="切换主题">
+          <span id="theme-icon">◐</span>
+        </button>
+      </nav>
+    </header>
+
+    <main class="main-content">
+      
+<section id="about" class="section about">
+  <div class="about-left">
+    <div class="about-avatar">
+      
+      <img src="/uploads/img/1769782430_3f9a447b4ec1c4a460ecf8561b887c55.jpg" alt="Ytaking(言说)"
+        data-avatar-pos-x="8"
+        data-avatar-pos-y="20"
+        data-avatar-scale="0.80"
+        style="object-position: 50% 50%; transform: scale(1);">
+      
+    </div>
+    <div class="about-copy">
+      <h2>关于我</h2>
+      <p class="about-position">长期主义的产品与工程作者，写作是我的思考方式。</p>
+      <div class="about-tags">
+        
+        <span>产品策略</span>
+        
+        <span>Go 与架构</span>
+        
+        <span>写作系统</span>
+        
+        <span>个人知识管理</span>
+        
+      </div>
+      <div class="about-links">
+        
+        <a class="social-pill" href="mailto:zhreddie@outlook.com">
+          <span class="social-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" role="img" focusable="false">
+              <path d="M4 6.5h16a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2zm0 2.2v6.8h16V8.7l-8 5.1-8-5.1zm8 3.4 8-5.1H4l8 5.1z"></path>
+            </svg>
+          </span>
+          邮箱
+        </a>
+        
+        
+        <a class="social-pill" href="https://github.com/coffcat6" target="_blank" rel="noopener">
+          <span class="social-icon" aria-hidden="true">
+            
+            <svg viewBox="0 0 24 24" role="img" focusable="false">
+              <path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.55 2.87 8.4 6.84 9.76.5.09.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.9 1.56 2.36 1.11 2.94.85.09-.67.35-1.11.64-1.37-2.22-.26-4.56-1.14-4.56-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.32.1-2.75 0 0 .84-.27 2.75 1.05A9.3 9.3 0 0 1 12 6.8c.85 0 1.7.12 2.5.36 1.9-1.32 2.74-1.05 2.74-1.05.55 1.43.2 2.49.1 2.75.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.79-4.57 5.05.36.32.68.95.68 1.92 0 1.38-.01 2.5-.01 2.84 0 .27.18.59.69.49A10.03 10.03 0 0 0 22 12.26C22 6.58 17.52 2 12 2z"></path>
+            </svg>
+            
+          </span>
+          GitHub
+        </a>
+        
+      </div>
+    </div>
+  </div>
+  <div class="about-right">
+    <div class="about-card">
+      <h3>近期计划</h3>
+      <ul>
+        
+        <li>建立一套内容发布流程</li>
+        
+        <li>输出长期产品思考</li>
+        
+        <li>记录工程实践与复盘</li>
+        
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="hero">
+  <div class="hero-copy">
+    <p class="eyebrow">个人简介</p>
+    
+    <p class="lead">我在做能长期生长的产品，喜欢清晰的结构、可维护的代码与有温度的文字。</p>
+    <div class="hero-meta">
+      <span class="meta-pill">西安</span>
+      
+    </div>
+    
+  </div>
+  <div class="hero-card">
+    <div class="card-label">精选</div>
+    
+    <div class="featured-carousel" data-rotate="true">
+      
+      <div class="featured-slide is-active">
+        
+        <div class="featured-body">
+          <h3>213125412312</h3>
+          <p></p>
+          <div class="card-meta">
+            <span>2026-01-27</span>
+            <span class="badge">1</span>
+          </div>
+          
+          <div class="tag-row">
+            <span class="tag">1</span>
+          </div>
+          
+          <a class="text-link" href="https://coffcat6.github.io/ytaking/posts/12312321">阅读精选 -></a>
+        </div>
+      </div>
+      
+      <div class="featured-slide ">
+        
+        <div class="featured-thumb">
+          <img src="https://images.unsplash.com/photo-1500576992153-0271099def59?q=80&amp;w=1469&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.1.0&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="你好">
+        </div>
+        
+        <div class="featured-body">
+          <h3>你好</h3>
+          <p>你好</p>
+          <div class="card-meta">
+            <span>2026-01-27</span>
+            <span class="badge">hello</span>
+          </div>
+          
+          <div class="tag-row">
+            <span class="tag">hello</span>
+          </div>
+          
+          <a class="text-link" href="https://coffcat6.github.io/ytaking/posts/hello">阅读精选 -></a>
+        </div>
+      </div>
+      
+      <div class="featured-slide ">
+        
+        <div class="featured-body">
+          <h3>test</h3>
+          <p>test</p>
+          <div class="card-meta">
+            <span>2026-01-25</span>
+            <span class="badge">test</span>
+          </div>
+          
+          <div class="tag-row">
+            <span class="tag">test</span>
+          </div>
+          
+          <a class="text-link" href="https://coffcat6.github.io/ytaking/posts/test">阅读精选 -></a>
+        </div>
+      </div>
+      
+      <div class="featured-slide ">
+        
+        <div class="featured-thumb">
+          <img src="https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="把博客当成产品来做">
+        </div>
+        
+        <div class="featured-body">
+          <h3>把博客当成产品来做</h3>
+          <p>用可复用组件、清晰信息架构与发布流程，降低长期维护成本。</p>
+          <div class="card-meta">
+            <span>2026-01-05</span>
+            <span class="badge">产品</span>
+          </div>
+          
+          <div class="tag-row">
+            <span class="tag">产品思维</span><span class="tag">设计</span>
+          </div>
+          
+          <a class="text-link" href="https://coffcat6.github.io/ytaking/posts/blog-as-product">阅读精选 -></a>
+        </div>
+      </div>
+      
+      <div class="featured-slide ">
+        
+        <div class="featured-thumb">
+          <img src="https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="Go 的并发模型：从实践出发">
+        </div>
+        
+        <div class="featured-body">
+          <h3>Go 的并发模型：从实践出发</h3>
+          <p>用真实服务的吞吐案例解释 goroutine、channel 与背压设计。</p>
+          <div class="card-meta">
+            <span>2025-12-18</span>
+            <span class="badge">工程</span>
+          </div>
+          
+          <div class="tag-row">
+            <span class="tag">Go</span><span class="tag">并发</span>
+          </div>
+          
+          <a class="text-link" href="https://coffcat6.github.io/ytaking/posts/go-concurrency-practice">阅读精选 -></a>
+        </div>
+      </div>
+      
+    </div>
+    
+  </div>
+</section>
+
+<section id="posts" class="section">
+  <div class="section-head">
+    <h2>最新文章</h2>
+    <p>每周更新一到两篇，关注产品、工程与写作。</p>
+  </div>
+  <div class="filter-bar">
+    <div class="filter-group">
+      <label for="filter-category">分类</label>
+      <select id="filter-category">
+        <option value="">全部</option>
+        
+        <option value="1">1</option>
+        
+        <option value="hello">hello</option>
+        
+        <option value="test">test</option>
+        
+        <option value="产品">产品</option>
+        
+        <option value="创作">创作</option>
+        
+        <option value="工程">工程</option>
+        
+      </select>
+    </div>
+    <div class="filter-group">
+      <label for="filter-tag">标签</label>
+      <select id="filter-tag">
+        <option value="">全部</option>
+        
+        <option value="1">1</option>
+        
+        <option value="Go">Go</option>
+        
+        <option value="hello">hello</option>
+        
+        <option value="test">test</option>
+        
+        <option value="产品思维">产品思维</option>
+        
+        <option value="写作">写作</option>
+        
+        <option value="并发">并发</option>
+        
+        <option value="系统">系统</option>
+        
+        <option value="设计">设计</option>
+        
+      </select>
+    </div>
+  </div>
+  <div class="post-grid fixed-grid">
+    
+    <article class="post-card" data-category="1"
+      data-tags="1">
+      <div class="post-thumb">
+        
+        <span>图片占位</span>
+        
+      </div>
+      <div class="post-meta">
+        <span>2026-01-27</span>
+        <span class="badge" data-category="1">1</span>
+        <span class="badge cat-featured">精选</span>
+      </div>
+      
+      <div class="tag-row">
+        <span class="tag">1</span>
+      </div>
+      
+      <h3>213125412312</h3>
+      <p></p>
+      <a class="text-link stretched-link" href="https://coffcat6.github.io/ytaking/posts/12312321">继续阅读 -></a>
+    </article>
+    
+    <article class="post-card" data-category="1"
+      data-tags="1">
+      <div class="post-thumb">
+        
+        <span>图片占位</span>
+        
+      </div>
+      <div class="post-meta">
+        <span>2026-01-27</span>
+        <span class="badge" data-category="1">1</span>
+        
+      </div>
+      
+      <div class="tag-row">
+        <span class="tag">1</span>
+      </div>
+      
+      <h3>1</h3>
+      <p>123</p>
+      <a class="text-link stretched-link" href="https://coffcat6.github.io/ytaking/posts/123">继续阅读 -></a>
+    </article>
+    
+    <article class="post-card" data-category="hello"
+      data-tags="hello">
+      <div class="post-thumb">
+        
+        <img src="https://images.unsplash.com/photo-1500576992153-0271099def59?q=80&amp;w=1469&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.1.0&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="你好">
+        
+      </div>
+      <div class="post-meta">
+        <span>2026-01-27</span>
+        <span class="badge" data-category="hello">hello</span>
+        <span class="badge cat-featured">精选</span>
+      </div>
+      
+      <div class="tag-row">
+        <span class="tag">hello</span>
+      </div>
+      
+      <h3>你好</h3>
+      <p>你好</p>
+      <a class="text-link stretched-link" href="https://coffcat6.github.io/ytaking/posts/hello">继续阅读 -></a>
+    </article>
+    
+    <article class="post-card" data-category="test"
+      data-tags="test">
+      <div class="post-thumb">
+        
+        <span>图片占位</span>
+        
+      </div>
+      <div class="post-meta">
+        <span>2026-01-25</span>
+        <span class="badge" data-category="test">test</span>
+        <span class="badge cat-featured">精选</span>
+      </div>
+      
+      <div class="tag-row">
+        <span class="tag">test</span>
+      </div>
+      
+      <h3>test</h3>
+      <p>test</p>
+      <a class="text-link stretched-link" href="https://coffcat6.github.io/ytaking/posts/test">继续阅读 -></a>
+    </article>
+    
+    <article class="post-card" data-category="产品"
+      data-tags="产品思维,设计">
+      <div class="post-thumb">
+        
+        <img src="https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="把博客当成产品来做">
+        
+      </div>
+      <div class="post-meta">
+        <span>2026-01-05</span>
+        <span class="badge" data-category="产品">产品</span>
+        <span class="badge cat-featured">精选</span>
+      </div>
+      
+      <div class="tag-row">
+        <span class="tag">产品思维</span><span class="tag">设计</span>
+      </div>
+      
+      <h3>把博客当成产品来做</h3>
+      <p>用可复用组件、清晰信息架构与发布流程，降低长期维护成本。</p>
+      <a class="text-link stretched-link" href="https://coffcat6.github.io/ytaking/posts/blog-as-product">继续阅读 -></a>
+    </article>
+    
+    <article class="post-card" data-category="工程"
+      data-tags="go,并发">
+      <div class="post-thumb">
+        
+        <img src="https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="Go 的并发模型：从实践出发">
+        
+      </div>
+      <div class="post-meta">
+        <span>2025-12-18</span>
+        <span class="badge" data-category="工程">工程</span>
+        <span class="badge cat-featured">精选</span>
+      </div>
+      
+      <div class="tag-row">
+        <span class="tag">Go</span><span class="tag">并发</span>
+      </div>
+      
+      <h3>Go 的并发模型：从实践出发</h3>
+      <p>用真实服务的吞吐案例解释 goroutine、channel 与背压设计。</p>
+      <a class="text-link stretched-link" href="https://coffcat6.github.io/ytaking/posts/go-concurrency-practice">继续阅读 -></a>
+    </article>
+    
+  </div>
+  <div class="pagination">
+    
+    <span class="pagination-disabled">← 上一页</span>
+    
+    <span class="pagination-info">第 1 / 2 页</span>
+    
+    <a class="pagination-link" href="https://coffcat6.github.io/ytaking/page/2/#posts">下一页 →</a>
+    
+  </div>
+</section>
+
+
+
+
+<script>
+  (function () {
+    var avatar = document.querySelector(".about-avatar img");
+    if (!avatar) return;
+    var posX = avatar.getAttribute("data-avatar-pos-x");
+    var posY = avatar.getAttribute("data-avatar-pos-y");
+    var scale = avatar.getAttribute("data-avatar-scale");
+    if (posX !== null && posY !== null) {
+      avatar.style.objectPosition = posX + "% " + posY + "%";
+    }
+    if (scale !== null) {
+      avatar.style.transform = "scale(" + scale + ")";
+    }
+  })();
+  (function () {
+    var root = document.querySelector(".featured-carousel");
+    if (!root) return;
+    var slides = root.querySelectorAll(".featured-slide");
+    if (slides.length <= 1) return;
+    var index = 0;
+    setInterval(function () {
+      slides[index].classList.remove("is-active");
+      index = (index + 1) % slides.length;
+      slides[index].classList.add("is-active");
+    }, 5000);
+  })();
+  (function () {
+    var categorySelect = document.getElementById("filter-category");
+    var tagSelect = document.getElementById("filter-tag");
+    var cards = document.querySelectorAll(".post-card");
+    if (!categorySelect || !tagSelect || cards.length === 0) return;
+    function applyFilter() {
+      var category = categorySelect.value;
+      var tag = tagSelect.value.toLowerCase();
+      cards.forEach(function (card) {
+        var cardCategory = card.getAttribute("data-category") || "";
+        var cardTags = (card.getAttribute("data-tags") || "").split(",");
+        var matchCategory = category === "" || cardCategory === category;
+        var matchTag = tag === "" || cardTags.indexOf(tag) >= 0;
+        card.style.display = matchCategory && matchTag ? "flex" : "none";
+      });
+    }
+    categorySelect.addEventListener("change", applyFilter);
+    tagSelect.addEventListener("change", applyFilter);
+  })();
+</script>
+
+    </main>
+
+    <footer class="site-footer">
+      <div>(c) 2026 Ytaking(言说) - Build with Go</div>
+      <div class="footer-links">
+        <a href="mailto:zhreddie@outlook.com">邮箱</a>
+        
+        <a href="https://github.com/coffcat6" target="_blank" rel="noopener">GitHub</a>
+        
+      </div>
+    </footer>
+  </div>
+  <script>
+    (function () {
+      var btn = document.getElementById('theme-btn');
+      var root = document.documentElement;
+      btn.addEventListener('click', function () {
+        var current = root.getAttribute('data-theme');
+        var target = current === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', target);
+        localStorage.setItem('theme', target);
+      });
+    })();
+  </script>
+</body>
+
+</html>
