@@ -42,12 +42,3 @@ ADMIN_PASS=yourpass
 SITE_BASE_URL=http://localhost:8080
 ADMIN_BASE_URL=http://localhost:8080/admin
 ```
-
-## Next Improvements
-
-- Add authentication for admin
-- Markdown rendering
-- Tag and archive pages
-- Image upload and media library
-- Pagination and search
-- Deploy to VPS or container
