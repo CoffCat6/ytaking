@@ -74,8 +74,10 @@
     <footer class="site-footer">
       <div>(c) 2026 {{.Title}} - Build with Go</div>
       <div class="footer-links">
-        <a href="mailto:{{.Email}}">邮箱</a>
-        <a href="https://github.com/">GitHub</a>
+        {{if .Email}}<a href="mailto:{{.Email}}">邮箱</a>{{end}}
+        {{range .SocialLinks}}
+        <a href="{{.URL}}" target="_blank" rel="noopener">{{.Name}}</a>
+        {{end}}
       </div>
     </footer>
   </div>

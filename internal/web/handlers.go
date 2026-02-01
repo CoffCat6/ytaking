@@ -246,6 +246,8 @@ func (s *Server) AdminSettings(w http.ResponseWriter, r *http.Request) {
 		profile := s.SiteStore.Get()
 		data["Profile"] = profile
 		data["FocusText"] = strings.Join(profile.CurrentFocus, "\n")
+		data["SkillsText"] = strings.Join(profile.Skills, "\n")
+		data["SocialText"] = socialLinksToText(profile.SocialLinks)
 		s.render(w, "admin_settings.html", data)
 	case http.MethodPost:
 		// TODO: Validate CSRF
@@ -256,6 +258,8 @@ func (s *Server) AdminSettings(w http.ResponseWriter, r *http.Request) {
 			data["Error"] = err.Error()
 			data["Profile"] = profile
 			data["FocusText"] = strings.Join(profile.CurrentFocus, "\n")
+			data["SkillsText"] = strings.Join(profile.Skills, "\n")
+			data["SocialText"] = socialLinksToText(profile.SocialLinks)
 			s.render(w, "admin_settings.html", data)
 			return
 		}
@@ -391,10 +395,17 @@ func parseSiteForm(r *http.Request) blog.SiteProfile {
 		Title:        strings.TrimSpace(r.FormValue("title")),
 		Tagline:      strings.TrimSpace(r.FormValue("tagline")),
 		Intro:        strings.TrimSpace(r.FormValue("intro")),
+		Positioning:  strings.TrimSpace(r.FormValue("positioning")),
+		Skills:       splitLines(strings.TrimSpace(r.FormValue("skills"))),
+		Avatar:       strings.TrimSpace(r.FormValue("avatar")),
+		AvatarPosX:   parseFloatDefault(r.FormValue("avatar_pos_x"), 50),
+		AvatarPosY:   parseFloatDefault(r.FormValue("avatar_pos_y"), 50),
+		AvatarScale:  clampFloat(parseFloatDefault(r.FormValue("avatar_scale"), 1.0), 0.5, 1.6),
 		Location:     strings.TrimSpace(r.FormValue("location")),
 		Email:        strings.TrimSpace(r.FormValue("email")),
 		Newsletter:   strings.TrimSpace(r.FormValue("newsletter")),
 		CurrentFocus: splitLines(strings.TrimSpace(r.FormValue("current_focus"))),
+		SocialLinks:  parseSocialLinks(strings.TrimSpace(r.FormValue("social_links"))),
 	}
 }
 
@@ -512,10 +523,17 @@ func (s *Server) baseData(r *http.Request) map[string]any {
 		"Title":        profile.Title,
 		"Tagline":      profile.Tagline,
 		"Intro":        profile.Intro,
+		"Positioning":  profile.Positioning,
+		"Skills":       profile.Skills,
+		"Avatar":       profile.Avatar,
+		"AvatarPosX":   profile.AvatarPosX,
+		"AvatarPosY":   profile.AvatarPosY,
+		"AvatarScale":  profile.AvatarScale,
 		"Location":     profile.Location,
 		"Email":        profile.Email,
 		"Newsletter":   profile.Newsletter,
 		"CurrentFocus": profile.CurrentFocus,
+		"SocialLinks":  profile.SocialLinks,
 		"SiteURL":      s.Config.SiteBaseURL,
 		"AdminURL":     s.Config.AdminBaseURL,
 		"CSRFToken":    getCsrfToken(r),
@@ -543,6 +561,66 @@ func splitLines(input string) []string {
 		result = append(result, line)
 	}
 	return result
+}
+
+func parseSocialLinks(input string) []blog.SocialLink {
+	if input == "" {
+		return nil
+	}
+	lines := strings.Split(input, "\n")
+	var links []blog.SocialLink
+	for _, line := range lines {
+		line = strings.TrimSpace(line)
+		if line == "" {
+			continue
+		}
+		parts := strings.SplitN(line, "|", 2)
+		if len(parts) != 2 {
+			continue
+		}
+		name := strings.TrimSpace(parts[0])
+		url := strings.TrimSpace(parts[1])
+		if name == "" || url == "" {
+			continue
+		}
+		links = append(links, blog.SocialLink{Name: name, URL: url})
+	}
+	return links
+}
+
+func socialLinksToText(links []blog.SocialLink) string {
+	if len(links) == 0 {
+		return ""
+	}
+	lines := make([]string, 0, len(links))
+	for _, link := range links {
+		if link.Name == "" || link.URL == "" {
+			continue
+		}
+		lines = append(lines, link.Name+"|"+link.URL)
+	}
+	return strings.Join(lines, "\n")
+}
+
+func parseFloatDefault(val string, def float64) float64 {
+	if val == "" {
+		return def
+	}
+	f, err := strconv.ParseFloat(val, 64)
+	if err != nil {
+		return def
+	}
+	return f
+}
+
+func clampFloat(v, min, max float64) float64 {
+	if v < min {
+		return min
+	}
+	if v > max {
+		return max
+	}
+	return v
 }
 
 func renderMarkdown(input string) string {

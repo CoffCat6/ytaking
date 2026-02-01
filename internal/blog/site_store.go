@@ -78,9 +78,20 @@ func (s *SiteStore) save() error {
 
 func defaultProfile() SiteProfile {
 	return SiteProfile{
-		Title:      "Ytakling(言说)",
-		Tagline:    "记录产品、工程与创作的个人博客",
-		Intro:      "我在做能长期生长的产品，喜欢清晰的结构、可维护的代码与有温度的文字。",
+		Title:       "Ytakling(言说)",
+		Tagline:     "记录产品、工程与创作的个人博客",
+		Intro:       "我在做能长期生长的产品，喜欢清晰的结构、可维护的代码与有温度的文字。",
+		Positioning: "长期主义的产品与工程作者，写作是我的思考方式。",
+		Skills: []string{
+			"产品策略",
+			"Go 与架构",
+			"写作系统",
+			"个人知识管理",
+		},
+		Avatar:     "",
+		AvatarPosX: 50,
+		AvatarPosY: 50,
+		AvatarScale: 1.0,
 		Location:   "杭州 - CN",
 		Email:      "hi@example.com",
 		Newsletter: "每月一封：复盘、工具、写作。",
@@ -88,6 +99,9 @@ func defaultProfile() SiteProfile {
 			"建立一套内容发布流程",
 			"输出长期产品思考",
 			"记录工程实践与复盘",
+		},
+		SocialLinks: []SocialLink{
+			{Name: "GitHub", URL: "https://github.com/"},
 		},
 	}
 }

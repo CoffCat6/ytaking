@@ -1,37 +1,79 @@
 {{define "content"}}
 <section id="about" class="section about">
-  <div>
-    <h2>关于我</h2>
-    <p>专注于把想法落成可持续的产品。写作是我的思考方式，也是持续输出的承诺。</p>
-    <div class="about-tags">
-      <span>产品策略</span>
-      <span>Go 与架构</span>
-      <span>写作系统</span>
-      <span>个人知识管理</span>
+  <div class="about-left">
+    <div class="about-avatar">
+      {{if .Avatar}}
+      <img src="{{.Avatar}}" alt="{{.Title}}"
+        data-avatar-pos-x="{{printf "%.0f" .AvatarPosX}}"
+        data-avatar-pos-y="{{printf "%.0f" .AvatarPosY}}"
+        data-avatar-scale="{{printf "%.2f" .AvatarScale}}"
+        style="object-position: 50% 50%; transform: scale(1);">
+      {{else}}
+      <div class="avatar-placeholder">上传头像</div>
+      {{end}}
+    </div>
+    <div class="about-copy">
+      <h2>关于我</h2>
+      <p class="about-position">{{if .Positioning}}{{.Positioning}}{{else}}{{.Intro}}{{end}}</p>
+      <div class="about-tags">
+        {{range .Skills}}
+        <span>{{.}}</span>
+        {{end}}
+      </div>
+      <div class="about-links">
+        {{if .Email}}
+        <a class="social-pill" href="mailto:{{.Email}}">
+          <span class="social-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" role="img" focusable="false">
+              <path d="M4 6.5h16a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2zm0 2.2v6.8h16V8.7l-8 5.1-8-5.1zm8 3.4 8-5.1H4l8 5.1z"></path>
+            </svg>
+          </span>
+          邮箱
+        </a>
+        {{end}}
+        {{range .SocialLinks}}
+        <a class="social-pill" href="{{.URL}}" target="_blank" rel="noopener">
+          <span class="social-icon" aria-hidden="true">
+            {{if eq .Name "GitHub"}}
+            <svg viewBox="0 0 24 24" role="img" focusable="false">
+              <path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.55 2.87 8.4 6.84 9.76.5.09.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.9 1.56 2.36 1.11 2.94.85.09-.67.35-1.11.64-1.37-2.22-.26-4.56-1.14-4.56-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.32.1-2.75 0 0 .84-.27 2.75 1.05A9.3 9.3 0 0 1 12 6.8c.85 0 1.7.12 2.5.36 1.9-1.32 2.74-1.05 2.74-1.05.55 1.43.2 2.49.1 2.75.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.79-4.57 5.05.36.32.68.95.68 1.92 0 1.38-.01 2.5-.01 2.84 0 .27.18.59.69.49A10.03 10.03 0 0 0 22 12.26C22 6.58 17.52 2 12 2z"></path>
+            </svg>
+            {{else}}
+            <svg viewBox="0 0 24 24" role="img" focusable="false">
+              <path d="M14 3h7v7h-2V6.41l-9.3 9.3-1.4-1.42 9.3-9.3H14V3zM5 5h6v2H7v10h10v-4h2v6H5V5z"></path>
+            </svg>
+            {{end}}
+          </span>
+          {{.Name}}
+        </a>
+        {{end}}
+      </div>
     </div>
   </div>
-  <div class="about-card">
-    <h3>当前在做</h3>
-    <ul>
-      {{range .CurrentFocus}}
-      <li>{{.}}</li>
-      {{end}}
-    </ul>
+  <div class="about-right">
+    <div class="about-card">
+      <h3>近期计划</h3>
+      <ul>
+        {{range .CurrentFocus}}
+        <li>{{.}}</li>
+        {{end}}
+      </ul>
+    </div>
   </div>
 </section>
 
 <section class="hero">
   <div class="hero-copy">
     <p class="eyebrow">{{.Tagline}}</p>
-    <h1>写给热爱长期主义的人。</h1>
+    <!-- <h1>写给热爱长期主义的人。</h1> -->
     <p class="lead">{{.Intro}}</p>
     <div class="hero-meta">
       <span class="meta-pill">{{.Location}}</span>
-      <a class="meta-link" href="mailto:{{.Email}}">{{.Email}}</a>
+      <!-- <a class="meta-link" href="mailto:{{.Email}}">{{.Email}}</a> -->
     </div>
-    <div class="hero-actions">
+    <!-- <div class="hero-actions">
       <a class="primary-btn" href="#posts">阅读最新</a>
-    </div>
+    </div> -->
   </div>
   <div class="hero-card">
     <div class="card-label">精选</div>
@@ -141,6 +183,19 @@
 
 <script>
   (function () {
+    var avatar = document.querySelector(".about-avatar img");
+    if (!avatar) return;
+    var posX = avatar.getAttribute("data-avatar-pos-x");
+    var posY = avatar.getAttribute("data-avatar-pos-y");
+    var scale = avatar.getAttribute("data-avatar-scale");
+    if (posX !== null && posY !== null) {
+      avatar.style.objectPosition = posX + "% " + posY + "%";
+    }
+    if (scale !== null) {
+      avatar.style.transform = "scale(" + scale + ")";
+    }
+  })();
+  (function () {
     var root = document.querySelector(".featured-carousel");
     if (!root) return;
     var slides = root.querySelectorAll(".featured-slide");
@@ -150,7 +205,7 @@
       slides[index].classList.remove("is-active");
       index = (index + 1) % slides.length;
       slides[index].classList.add("is-active");
-    }, 3000);
+    }, 5000);
   })();
   (function () {
     var categorySelect = document.getElementById("filter-category");
