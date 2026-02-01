@@ -1,7 +1,0 @@
-.git
-.vscode
-data/*
-!data/.keep
-tmp
-*.exe
-*.tmp
