@@ -18,7 +18,7 @@
   </div>
   {{if .Post.CoverImage}}
   <div class="post-cover">
-    <img src="{{.Post.CoverImage}}" alt="{{.Post.Title}}">
+    <img src="{{assetURL .Post.CoverImage}}" alt="{{.Post.Title}}">
   </div>
   {{end}}
   <div class="post-content">{{.PostHTML}}</div>
@@ -31,7 +31,7 @@
       <article class="post-card related-card">
         <div class="post-thumb" style="height: 100px;">
           {{if .CoverImage}}
-          <img src="{{.CoverImage}}" alt="{{.Title}}">
+          <img src="{{assetURL .CoverImage}}" alt="{{.Title}}">
           {{else}}
           <span>#</span>
           {{end}}

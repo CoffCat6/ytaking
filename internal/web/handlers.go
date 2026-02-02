@@ -111,7 +111,9 @@ func (s *Server) PostDetail(w http.ResponseWriter, r *http.Request) {
 
 	data := s.baseData(r)
 	data["Post"] = post
-	data["PostHTML"] = template.HTML(renderMarkdown(post.Content))
+	postHTML := renderMarkdown(post.Content)
+	postHTML = s.rewriteHTMLAssetURLs(postHTML)
+	data["PostHTML"] = template.HTML(postHTML)
 	data["RelatedPosts"] = related
 
 	// SEO Data
@@ -444,6 +446,9 @@ func (s *Server) templateFor(page string) (*template.Template, error) {
 	}
 
 	t, err := template.New("").Funcs(template.FuncMap{
+		"assetURL": func(input string) string {
+			return s.assetURL(input)
+		},
 		"formatDate": func(t time.Time) string {
 			if t.IsZero() {
 				return ""
@@ -466,6 +471,9 @@ func (s *Server) templateFor(page string) (*template.Template, error) {
 
 func (s *Server) renderPartial(w http.ResponseWriter, page string, data map[string]any) {
 	t, err := template.New(filepath.Base(page)).Funcs(template.FuncMap{
+		"assetURL": func(input string) string {
+			return s.assetURL(input)
+		},
 		"formatDate": func(t time.Time) string {
 			if t.IsZero() {
 				return ""
@@ -540,6 +548,25 @@ func (s *Server) baseData(r *http.Request) map[string]any {
 	}
 }
 
+func (s *Server) assetURL(raw string) string {
+	return resolveAssetURL(s.Config.SiteBaseURL, raw)
+}
+
+func (s *Server) rewriteHTMLAssetURLs(input string) string {
+	base := normalizeBaseURL(s.Config.SiteBaseURL)
+	if base == "" || strings.TrimSpace(input) == "" {
+		return input
+	}
+
+	replacer := strings.NewReplacer(
+		`src="/`, `src="`+base+`/`,
+		`href="/`, `href="`+base+`/`,
+		"src='/", "src='"+base+"/",
+		"href='/", "href='"+base+"/",
+	)
+	return replacer.Replace(input)
+}
+
 func (s *Server) pageURL(page int) string {
 	if page <= 1 {
 		return s.Config.SiteBaseURL + "/#posts"
@@ -561,6 +588,31 @@ func splitLines(input string) []string {
 		result = append(result, line)
 	}
 	return result
+}
+
+func normalizeBaseURL(base string) string {
+	return strings.TrimRight(strings.TrimSpace(base), "/")
+}
+
+func resolveAssetURL(base, raw string) string {
+	raw = strings.TrimSpace(raw)
+	if raw == "" {
+		return raw
+	}
+	if strings.HasPrefix(raw, "http://") || strings.HasPrefix(raw, "https://") || strings.HasPrefix(raw, "//") {
+		return raw
+	}
+	if strings.HasPrefix(raw, "mailto:") || strings.HasPrefix(raw, "tel:") || strings.HasPrefix(raw, "data:") {
+		return raw
+	}
+	if strings.HasPrefix(raw, "/") {
+		base = normalizeBaseURL(base)
+		if base == "" {
+			return raw
+		}
+		return base + raw
+	}
+	return raw
 }
 
 func parseSocialLinks(input string) []blog.SocialLink {

@@ -3,7 +3,7 @@
   <div class="about-left">
     <div class="about-avatar">
       {{if .Avatar}}
-      <img src="{{.Avatar}}" alt="{{.Title}}"
+      <img src="{{assetURL .Avatar}}" alt="{{.Title}}"
         data-avatar-pos-x="{{printf "%.0f" .AvatarPosX}}"
         data-avatar-pos-y="{{printf "%.0f" .AvatarPosY}}"
         data-avatar-scale="{{printf "%.2f" .AvatarScale}}"
@@ -83,7 +83,7 @@
       <div class="featured-slide {{if eq $i 0}}is-active{{end}}">
         {{if $post.CoverImage}}
         <div class="featured-thumb">
-          <img src="{{$post.CoverImage}}" alt="{{$post.Title}}">
+          <img src="{{assetURL $post.CoverImage}}" alt="{{$post.Title}}">
         </div>
         {{end}}
         <div class="featured-body">
@@ -142,7 +142,7 @@
       data-tags="{{range $i, $t := .Tags}}{{if $i}},{{end}}{{lower $t}}{{end}}">
       <div class="post-thumb">
         {{if .CoverImage}}
-        <img src="{{.CoverImage}}" alt="{{.Title}}">
+        <img src="{{assetURL .CoverImage}}" alt="{{.Title}}">
         {{else}}
         <span>图片占位</span>
         {{end}}

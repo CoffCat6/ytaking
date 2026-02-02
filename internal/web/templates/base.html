@@ -17,7 +17,7 @@
   {{if .SiteURL}}
   <meta property="og:url" content="{{.SiteURL}}{{if .CurrentPath}}{{.CurrentPath}}{{end}}" />{{end}}
   {{if .CoverImage}}
-  <meta property="og:image" content="{{.CoverImage}}" />{{end}}
+  <meta property="og:image" content="{{assetURL .CoverImage}}" />{{end}}
   <meta property="og:type" content="{{if .IsPost}}article{{else}}website{{end}}" />
   <script>
     (function () {

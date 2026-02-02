@@ -62,6 +62,7 @@ func main() {
 	routes = append(routes, "/posts")
 	// Add archive page
 	routes = append(routes, "/archive")
+	// routes = append(routes")
 	// Add paginated index pages (static)
 	totalPosts := len(posts)
 	totalPages := (totalPosts + web.IndexPageSize - 1) / web.IndexPageSize

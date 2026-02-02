@@ -10,7 +10,7 @@
     <article class="post-card">
       <div class="post-thumb">
         {{if .CoverImage}}
-        <img src="{{.CoverImage}}" alt="{{.Title}}">
+        <img src="{{assetURL .CoverImage}}" alt="{{.Title}}">
         {{else}}
         <span>图片占位</span>
         {{end}}
