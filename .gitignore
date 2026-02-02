@@ -13,8 +13,10 @@ bin/
 # *.db-wal
 
 # Uploads
-uploads/
+uploads/*
 !uploads/.keep
+!uploads/img/
+!uploads/img/**
 
 # Logs
 *.log
