@@ -37,6 +37,11 @@ jobs:
       - name: Build static site
         run: |
           go run ./cmd/generator/main.go -base-url="https://blog.ytaking.me"
+      # 关键：确保产物根目录有 CNAME（只写域名，不要协议）
+      - name: Add CNAME for custom domain
+        run: |
+          echo "blog.ytaking.me" > ./dist/CNAME
+      
       # 4. 部署到 gh-pages 分支
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
