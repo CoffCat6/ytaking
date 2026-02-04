@@ -1,6 +1,70 @@
 {{define "content"}}
-<section id="about" class="section about">
-  <div class="about-left">
+<!-- 精选文章 - 顶部大图布局 -->
+{{if .FeaturedPosts}}
+<section class="featured-hero">
+  <div class="featured-carousel" id="featured-carousel" data-rotate="true">
+    {{range $i, $post := .FeaturedPosts}}
+    <article class="featured-item {{if eq $i 0}}is-active{{end}}">
+      <a href="{{$.SiteURL}}/posts/{{$post.Slug}}" class="featured-image">
+        {{if $post.CoverImage}}
+        <img src="{{assetURL $post.CoverImage}}" alt="{{$post.Title}}">
+        {{else}}
+        <div class="featured-placeholder">
+          <span>精选</span>
+        </div>
+        {{end}}
+      </a>
+      <div class="featured-content">
+        <div class="featured-label">
+          <span class="label-text">精选文章</span>
+          {{if gt (len $.FeaturedPosts) 1}}
+          <span class="label-count">{{add $i 1}} / {{len $.FeaturedPosts}}</span>
+          {{end}}
+        </div>
+        <h2 class="featured-title">
+          <a href="{{$.SiteURL}}/posts/{{$post.Slug}}">{{$post.Title}}</a>
+        </h2>
+        <p class="featured-summary">{{$post.Summary}}</p>
+        <div class="featured-meta">
+          <span class="meta-date">{{formatDate $post.CreatedAt}}</span>
+          {{if $post.Category}}<span class="meta-category">{{$post.Category}}</span>{{end}}
+        </div>
+        {{if $post.Tags}}
+        <div class="featured-tags">
+          {{range $post.Tags}}<span class="tag">{{.}}</span>{{end}}
+        </div>
+        {{end}}
+        <a class="featured-link" href="{{$.SiteURL}}/posts/{{$post.Slug}}">
+          阅读全文
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+    </article>
+    {{end}}
+  </div>
+  {{if gt (len .FeaturedPosts) 1}}
+  <div class="featured-nav">
+    <button class="featured-nav-btn" id="featured-prev" aria-label="上一篇">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M15 18l-6-6 6-6"/>
+      </svg>
+    </button>
+    <button class="featured-nav-btn" id="featured-next" aria-label="下一篇">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M9 18l6-6-6-6"/>
+      </svg>
+    </button>
+  </div>
+  {{end}}
+</section>
+{{end}}
+
+<!-- 关于我区块 -->
+<section id="about" class="section about about-vertical">
+  <!-- 头像和基本信息 -->
+  <div class="about-header">
     <div class="about-avatar">
       {{if .Avatar}}
       <img src="{{assetURL .Avatar}}" alt="{{.Title}}"
@@ -12,7 +76,7 @@
       <div class="avatar-placeholder">上传头像</div>
       {{end}}
     </div>
-    <div class="about-copy">
+    <div class="about-info">
       <h2>关于我</h2>
       <p class="about-position">{{if .Positioning}}{{.Positioning}}{{else}}{{.Intro}}{{end}}</p>
       <div class="about-tags">
@@ -50,63 +114,14 @@
       </div>
     </div>
   </div>
-  <div class="about-right">
-    <div class="about-card">
-      <h3>近期计划</h3>
-      <ul>
-        {{range .CurrentFocus}}
-        <li>{{.}}</li>
-        {{end}}
-      </ul>
+  
+  <!-- 个人简历/详细介绍 -->
+  <div class="about-body">
+    {{if .HeroBioHTML}}
+    <div class="about-bio">
+      <div class="hero-bio" id="hero-bio">{{.HeroBioHTML}}</div>
+      <button class="hero-bio-toggle" id="hero-bio-toggle" type="button">展开更多</button>
     </div>
-  </div>
-</section>
-
-<section class="hero">
-  <div class="hero-copy">
-    <p class="eyebrow">{{.Tagline}}</p>
-    <!-- <h1>写给热爱长期主义的人。</h1> -->
-    <p class="lead">{{.Intro}}</p>
-    <div class="hero-meta">
-      <span class="meta-pill">{{.Location}}</span>
-      <!-- <a class="meta-link" href="mailto:{{.Email}}">{{.Email}}</a> -->
-    </div>
-    <!-- <div class="hero-actions">
-      <a class="primary-btn" href="#posts">阅读最新</a>
-    </div> -->
-  </div>
-  <div class="hero-card">
-    <div class="card-label">精选</div>
-    {{if .FeaturedPosts}}
-    <div class="featured-carousel" data-rotate="true">
-      {{range $i, $post := .FeaturedPosts}}
-      <div class="featured-slide {{if eq $i 0}}is-active{{end}}">
-        {{if $post.CoverImage}}
-        <div class="featured-thumb">
-          <img src="{{assetURL $post.CoverImage}}" alt="{{$post.Title}}">
-        </div>
-        {{end}}
-        <div class="featured-body">
-          <h3>{{$post.Title}}</h3>
-          <p>{{$post.Summary}}</p>
-          <div class="card-meta">
-            <span>{{formatDate $post.CreatedAt}}</span>
-            {{if $post.Category}}<span class="badge">{{$post.Category}}</span>{{end}}
-          </div>
-          {{if $post.Tags}}
-          <div class="tag-row">
-            {{range $post.Tags}}<span class="tag">{{.}}</span>{{end}}
-          </div>
-          {{end}}
-          <a class="text-link" href="{{$.SiteURL}}/posts/{{$post.Slug}}">阅读精选 -></a>
-        </div>
-      </div>
-      {{end}}
-    </div>
-    {{else}}
-    <h3>还没有精选文章</h3>
-    <p>从后台新建一篇文章开始吧。</p>
-    <a class="text-link" href="{{$.AdminURL}}/admin/posts/new">去创建 -></a>
     {{end}}
   </div>
 </section>
@@ -195,17 +210,108 @@
       avatar.style.transform = "scale(" + scale + ")";
     }
   })();
+  // Hero Bio 展开/收起功能
   (function () {
-    var root = document.querySelector(".featured-carousel");
-    if (!root) return;
-    var slides = root.querySelectorAll(".featured-slide");
+    var bio = document.getElementById("hero-bio");
+    var toggle = document.getElementById("hero-bio-toggle");
+    if (!bio || !toggle) return;
+    
+    var maxHeight = 280; // 与 CSS 中的 max-height 保持一致
+    var isExpanded = false;
+    
+    function checkHeight() {
+      // 获取实际内容高度
+      var contentHeight = bio.scrollHeight;
+      if (contentHeight > maxHeight) {
+        // 内容超出，显示折叠状态和按钮
+        bio.classList.add("is-collapsed");
+        toggle.classList.add("is-visible");
+      } else {
+        // 内容未超出，隐藏按钮
+        bio.classList.remove("is-collapsed");
+        toggle.classList.remove("is-visible");
+      }
+    }
+    
+    toggle.addEventListener("click", function () {
+      isExpanded = !isExpanded;
+      if (isExpanded) {
+        bio.classList.remove("is-collapsed");
+        toggle.textContent = "收起";
+      } else {
+        bio.classList.add("is-collapsed");
+        toggle.textContent = "展开更多";
+        // 滚动到 hero 区域顶部
+        bio.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    });
+    
+    // 初始化检查
+    checkHeight();
+    // 窗口大小变化时重新检查
+    window.addEventListener("resize", checkHeight);
+  })();
+  // 精选文章轮播
+  (function () {
+    var carousel = document.getElementById("featured-carousel");
+    if (!carousel) return;
+    
+    var slides = carousel.querySelectorAll(".featured-item");
+    var prevBtn = document.getElementById("featured-prev");
+    var nextBtn = document.getElementById("featured-next");
+    
     if (slides.length <= 1) return;
+    
     var index = 0;
-    setInterval(function () {
+    var autoplayTimer = null;
+    var autoplayDelay = 6000;
+    
+    function showSlide(newIndex) {
       slides[index].classList.remove("is-active");
-      index = (index + 1) % slides.length;
+      index = (newIndex + slides.length) % slides.length;
       slides[index].classList.add("is-active");
-    }, 5000);
+    }
+    
+    function nextSlide() {
+      showSlide(index + 1);
+    }
+    
+    function prevSlide() {
+      showSlide(index - 1);
+    }
+    
+    function startAutoplay() {
+      stopAutoplay();
+      autoplayTimer = setInterval(nextSlide, autoplayDelay);
+    }
+    
+    function stopAutoplay() {
+      if (autoplayTimer) {
+        clearInterval(autoplayTimer);
+        autoplayTimer = null;
+      }
+    }
+    
+    if (prevBtn) {
+      prevBtn.addEventListener("click", function () {
+        prevSlide();
+        startAutoplay(); // 重置自动播放
+      });
+    }
+    
+    if (nextBtn) {
+      nextBtn.addEventListener("click", function () {
+        nextSlide();
+        startAutoplay(); // 重置自动播放
+      });
+    }
+    
+    // 鼠标悬停时暂停
+    carousel.addEventListener("mouseenter", stopAutoplay);
+    carousel.addEventListener("mouseleave", startAutoplay);
+    
+    // 启动自动播放
+    startAutoplay();
   })();
   (function () {
     var categorySelect = document.getElementById("filter-category");

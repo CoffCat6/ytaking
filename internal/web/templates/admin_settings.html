@@ -22,6 +22,10 @@
       <textarea name="intro" rows="3">{{.Profile.Intro}}</textarea>
     </label>
     <label>
+      个人简历 <span style="color: var(--muted); font-size: 12px; font-weight: normal;">(支持 Markdown 格式，显示在首页 Hero 区域)</span>
+      <textarea name="hero_bio" rows="8" placeholder="支持 Markdown 格式，例如：&#10;&#10;## 关于我&#10;&#10;我是一名**产品工程师**，专注于：&#10;&#10;- 产品设计&#10;- 全栈开发&#10;- 技术写作&#10;&#10;> 长期主义者，相信复利的力量。">{{.Profile.HeroBio}}</textarea>
+    </label>
+    <label>
       一句话定位
       <input type="text" name="positioning" value="{{.Profile.Positioning}}" placeholder="例如：长期主义的产品与工程作者" />
     </label>

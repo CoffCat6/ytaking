@@ -4,6 +4,7 @@ type SiteProfile struct {
 	Title        string       `json:"title"`
 	Tagline      string       `json:"tagline"`
 	Intro        string       `json:"intro"`
+	HeroBio      string       `json:"hero_bio"` // Markdown 格式的个人简介
 	Positioning  string       `json:"positioning"`
 	Skills       []string     `json:"skills"`
 	Avatar       string       `json:"avatar"`

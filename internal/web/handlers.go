@@ -397,6 +397,7 @@ func parseSiteForm(r *http.Request) blog.SiteProfile {
 		Title:        strings.TrimSpace(r.FormValue("title")),
 		Tagline:      strings.TrimSpace(r.FormValue("tagline")),
 		Intro:        strings.TrimSpace(r.FormValue("intro")),
+		HeroBio:      strings.TrimSpace(r.FormValue("hero_bio")),
 		Positioning:  strings.TrimSpace(r.FormValue("positioning")),
 		Skills:       splitLines(strings.TrimSpace(r.FormValue("skills"))),
 		Avatar:       strings.TrimSpace(r.FormValue("avatar")),
@@ -461,6 +462,9 @@ func (s *Server) templateFor(page string) (*template.Template, error) {
 		"joinTags": func(tags []string) string {
 			return strings.Join(tags, ",")
 		},
+		"add": func(a, b int) int {
+			return a + b
+		},
 	}).ParseFiles(files...)
 	if err != nil {
 		return nil, err
@@ -485,6 +489,9 @@ func (s *Server) renderPartial(w http.ResponseWriter, page string, data map[stri
 		},
 		"joinTags": func(tags []string) string {
 			return strings.Join(tags, ",")
+		},
+		"add": func(a, b int) int {
+			return a + b
 		},
 	}).ParseFiles("internal/web/templates/" + page)
 	if err != nil {
@@ -527,10 +534,21 @@ func slugify(input string) string {
 
 func (s *Server) baseData(r *http.Request) map[string]any {
 	profile := s.SiteStore.Get()
+
+	// 渲染 HeroBio 的 Markdown
+	var heroBioHTML template.HTML
+	if profile.HeroBio != "" {
+		rendered := renderMarkdown(profile.HeroBio)
+		rendered = s.rewriteHTMLAssetURLs(rendered)
+		heroBioHTML = template.HTML(rendered)
+	}
+
 	return map[string]any{
 		"Title":        profile.Title,
 		"Tagline":      profile.Tagline,
 		"Intro":        profile.Intro,
+		"HeroBio":      profile.HeroBio,
+		"HeroBioHTML":  heroBioHTML,
 		"Positioning":  profile.Positioning,
 		"Skills":       profile.Skills,
 		"Avatar":       profile.Avatar,
