@@ -36,7 +36,7 @@ jobs:
       # 3. 编译并生成静态站点（dist 目录）
       - name: Build static site
         run: |
-          go run ./cmd/generator/main.go -base-url="https://coffcat6.github.io/ytaking"
+          go run ./cmd/generator/main.go -base-url="https://ytaking.me/ytaking"
       # 4. 部署到 gh-pages 分支
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
