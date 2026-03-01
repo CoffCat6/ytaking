@@ -6,17 +6,18 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title>1 - Ytaking(言说)</title>
+  <title>现代前端 CSS 布局核心技巧 - Ytaking(言说)</title>
   
-  <meta name="description" content="123">
+  <meta name="description" content="Flexbox 和 Grid 已经成为现代布局的基石。本文分享一些高频实用的 CSS 技巧。">
   
-  <meta name="keywords" content="1">
-  <meta property="og:title" content="1 - Ytaking(言说)" />
+  <meta name="keywords" content="CSS, Flexbox, Grid">
+  <meta property="og:title" content="现代前端 CSS 布局核心技巧 - Ytaking(言说)" />
   
-  <meta property="og:description" content="123" />
+  <meta property="og:description" content="Flexbox 和 Grid 已经成为现代布局的基石。本文分享一些高频实用的 CSS 技巧。" />
   
-  <meta property="og:url" content="https://blog.ytaking.me/posts/123" />
+  <meta property="og:url" content="https://blog.ytaking.me/posts/modern-css-layout-tips" />
   
+  <meta property="og:image" content="https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?w=800&amp;q=80" />
   <meta property="og:type" content="article" />
   <script>
     (function () {
@@ -47,10 +48,10 @@
   <div class="page-shell">
     <header class="site-header">
       <a class="brand brand-link" href="https://blog.ytaking.me/" title="返回主页">
-        <img class="brand-icon" src="https://blog.ytaking.me/static/favicon.png" alt="1 - Ytaking(言说)" />
+        <img class="brand-icon" src="https://blog.ytaking.me/static/favicon.png" alt="现代前端 CSS 布局核心技巧 - Ytaking(言说)" />
          
         <div>
-          <div class="brand-title">1 - Ytaking(言说)</div>
+          <div class="brand-title">现代前端 CSS 布局核心技巧 - Ytaking(言说)</div>
           <div class="brand-sub">个人博客 - 长期记录</div>
         </div>
       </a>
@@ -69,22 +70,41 @@
 <section class="section post-detail">
   <div class="post-header">
     <a class="text-link" href="https://blog.ytaking.me/posts">&lt;- 返回文章列表</a>
-        <h1>1</h1>
+        <h1>现代前端 CSS 布局核心技巧</h1>
         <div class="post-meta">
-          <span>2026-01-27</span>
+          <span>2026-02-20</span>
           <span>·</span>
           <span>阅读时间: 1 分钟</span>
-          <span class="badge" data-category="1">1</span>
+          <span class="badge" data-category="前端开发">前端开发</span>
         </div>
         
         <div class="tag-row">
-          <span class="tag">1</span>
+          <span class="tag">CSS</span><span class="tag">Flexbox</span><span class="tag">Grid</span>
         </div>
         
-        <p class="lead">123</p>
+        <p class="lead">Flexbox 和 Grid 已经成为现代布局的基石。本文分享一些高频实用的 CSS 技巧。</p>
   </div>
   
-  <div class="post-content"><p>123123</p>
+  <div class="post-cover">
+    <img src="https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?w=800&amp;q=80" alt="现代前端 CSS 布局核心技巧">
+  </div>
+  
+  <div class="post-content"><h2>1. 完美居中</h2>
+<p>以前垂直居中是前端的噩梦，现在只需三行代码：</p>
+<pre><code class="language-css">.container {
+  display: grid;
+  place-items: center;
+}
+</code></pre>
+<h2>2. Flexbox 响应式间距</h2>
+<p>利用 <code>gap</code> 属性替代繁琐的 margin，让组件排列更加优雅：</p>
+<pre><code class="language-css">.flex-row {
+  display: flex;
+  gap: 16px;
+}
+</code></pre>
+<h2>3. CSS 变量管理主题</h2>
+<p>通过 <code>:root</code> 声明全局 CSS 变量，轻松实现暗黑模式切换，代码更加易读与维护。</p>
 </div>
 
   
@@ -95,12 +115,24 @@
       <article class="post-card related-card">
         <div class="post-thumb" style="height: 100px;">
           
-          <img src="https://blog.ytaking.me/uploads/img/1770014281_th.jpg" alt="213125412312">
+          <img src="https://images.unsplash.com/photo-1566241440091-ec10de8db2e1?w=800&amp;q=80" alt="Tailwind CSS 为什么这么火？">
           
         </div>
         <div class="related-info">
-          <h4><a href="https://blog.ytaking.me/posts/12312321">213125412312</a></h4>
-          <span class="muted" style="font-size: 12px;">2026-01-27</span>
+          <h4><a href="https://blog.ytaking.me/posts/why-tailwindcss-is-popular">Tailwind CSS 为什么这么火？</a></h4>
+          <span class="muted" style="font-size: 12px;">2026-02-26</span>
+        </div>
+      </article>
+      
+      <article class="post-card related-card">
+        <div class="post-thumb" style="height: 100px;">
+          
+          <img src="https://images.unsplash.com/photo-1550439062-609e1531270e?w=800&amp;q=80" alt="你真的会用 CSS 动画吗？">
+          
+        </div>
+        <div class="related-info">
+          <h4><a href="https://blog.ytaking.me/posts/mastering-css-animations">你真的会用 CSS 动画吗？</a></h4>
+          <span class="muted" style="font-size: 12px;">2026-02-23</span>
         </div>
       </article>
       
@@ -112,7 +144,7 @@
     </main>
 
     <footer class="site-footer">
-      <div>(c) 2026 1 - Ytaking(言说) - Build with Go</div>
+      <div>(c) 2026 现代前端 CSS 布局核心技巧 - Ytaking(言说) - Build with Go</div>
       <div class="footer-links">
         <a href="mailto:zhreddie@outlook.com">邮箱</a>
         

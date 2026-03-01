@@ -6,18 +6,18 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title>你好 - Ytaking(言说)</title>
+  <title>Docker 容器化实战指南 - Ytaking(言说)</title>
   
-  <meta name="description" content="你好">
+  <meta name="description" content="一文带你了解 Docker 的核心概念，以及如何编写优雅的 Dockerfile。">
   
-  <meta name="keywords" content="hello">
-  <meta property="og:title" content="你好 - Ytaking(言说)" />
+  <meta name="keywords" content="Docker, 容器化, CI/CD">
+  <meta property="og:title" content="Docker 容器化实战指南 - Ytaking(言说)" />
   
-  <meta property="og:description" content="你好" />
+  <meta property="og:description" content="一文带你了解 Docker 的核心概念，以及如何编写优雅的 Dockerfile。" />
   
-  <meta property="og:url" content="https://blog.ytaking.me/posts/hello" />
+  <meta property="og:url" content="https://blog.ytaking.me/posts/docker-container-guide" />
   
-  <meta property="og:image" content="https://images.unsplash.com/photo-1500576992153-0271099def59?q=80&amp;w=1469&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.1.0&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1605745341112-85968b19335b?w=800&amp;q=80" />
   <meta property="og:type" content="article" />
   <script>
     (function () {
@@ -48,10 +48,10 @@
   <div class="page-shell">
     <header class="site-header">
       <a class="brand brand-link" href="https://blog.ytaking.me/" title="返回主页">
-        <img class="brand-icon" src="https://blog.ytaking.me/static/favicon.png" alt="你好 - Ytaking(言说)" />
+        <img class="brand-icon" src="https://blog.ytaking.me/static/favicon.png" alt="Docker 容器化实战指南 - Ytaking(言说)" />
          
         <div>
-          <div class="brand-title">你好 - Ytaking(言说)</div>
+          <div class="brand-title">Docker 容器化实战指南 - Ytaking(言说)</div>
           <div class="brand-sub">个人博客 - 长期记录</div>
         </div>
       </a>
@@ -70,26 +70,34 @@
 <section class="section post-detail">
   <div class="post-header">
     <a class="text-link" href="https://blog.ytaking.me/posts">&lt;- 返回文章列表</a>
-        <h1>你好</h1>
+        <h1>Docker 容器化实战指南</h1>
         <div class="post-meta">
-          <span>2026-01-27</span>
+          <span>2026-02-24</span>
           <span>·</span>
           <span>阅读时间: 1 分钟</span>
-          <span class="badge" data-category="hello">hello</span>
+          <span class="badge" data-category="运维与架构">运维与架构</span>
         </div>
         
         <div class="tag-row">
-          <span class="tag">hello</span>
+          <span class="tag">Docker</span><span class="tag">容器化</span><span class="tag">CI/CD</span>
         </div>
         
-        <p class="lead">你好</p>
+        <p class="lead">一文带你了解 Docker 的核心概念，以及如何编写优雅的 Dockerfile。</p>
   </div>
   
   <div class="post-cover">
-    <img src="https://images.unsplash.com/photo-1500576992153-0271099def59?q=80&amp;w=1469&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.1.0&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="你好">
+    <img src="https://images.unsplash.com/photo-1605745341112-85968b19335b?w=800&amp;q=80" alt="Docker 容器化实战指南">
   </div>
   
-  <div class="post-content"></div>
+  <div class="post-content"><h2>为什么需要 Docker</h2>
+<p>“在我的机器上能跑”——这句程序员的经典台词，被 Docker 完美解决。它通过将应用及其依赖打包为一个镜像，保证了多环境的一致性。</p>
+<h2>编写优秀的 Dockerfile</h2>
+<ol>
+<li><strong>使用官方精简镜像</strong>：如 <code>alpine</code> 系列，减小镜像体积。</li>
+<li><strong>多阶段构建 (Multi-stage builds)</strong>：非常适合编译型语言如 Go。在第一阶段编译出可执行文件，第二阶段只将二进制文件放入最终的轻量级镜像中，极大缩小产物体积。</li>
+<li><strong>利用缓存</strong>：将变动频繁的代码拷贝放到最后，优先缓存依赖下载层。</li>
+</ol>
+</div>
 
   
 </section>
@@ -97,7 +105,7 @@
     </main>
 
     <footer class="site-footer">
-      <div>(c) 2026 你好 - Ytaking(言说) - Build with Go</div>
+      <div>(c) 2026 Docker 容器化实战指南 - Ytaking(言说) - Build with Go</div>
       <div class="footer-links">
         <a href="mailto:zhreddie@outlook.com">邮箱</a>
         
